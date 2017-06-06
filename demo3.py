@@ -2,7 +2,7 @@ from Tkinter import *
 
 root = Tk()
 
-frame1 = Frame(root,width=300,height=300,bg="yellow")
+frame1 = Frame(root,width=300,height=300,bg="#005bbb")
 frame2 = Frame(root,width=300,height=300,bg="green")
 
 label1 = Label(root,text="The question")
@@ -35,3 +35,5 @@ button1.grid(row=6,column=1,sticky=E)
 label6.grid(row=7,column=0,sticky=W)
 
 root.mainloop()
+
+#as a  student, I want to get a good grade, so I 
