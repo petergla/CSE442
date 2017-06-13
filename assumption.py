@@ -2,7 +2,7 @@ from truthvalue import TruthValue
 # Author: PJ Glasheen
 class Assumption:
 
-    def __init__(self, truth_value, assumption_text, reason_list):
+    def __init__(self, truth_value, assumption_text, reason_list = []):
         self.truth_value = truth_value #represented as a TruthValue object
         self.assumption_text = assumption_text #String for text of assumption
         self.reason_list = reason_list #list of tuples in format (bool, reason_text)
@@ -13,3 +13,6 @@ class Assumption:
 
     def getTruthValue(self):
         return self.truth_value
+
+    def getAssumptionText(self):
+        return self.assumption_text
