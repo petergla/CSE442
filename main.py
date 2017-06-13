@@ -1,32 +1,42 @@
 # import Tkinter as tk
 from Tkinter import *
 
+# Author: Paata Ugrekhelidze
+# The program contains one class(genStruc) that puts all
+# the pages together and links them the way they were defined to.
+# All the other classes represent page definitions that genStruc uses.
 
 class genStruc(Tk):
 	
 
 	def __init__(self, *args,**kwargs):
 		Tk.__init__(self,*args,**kwargs)
+		# creating a frame
 		container = Frame(self)
 		container.pack(side = "top", fill = "both", expand = True)
 
 		container.grid_rowconfigure(0, weight = 1)
 		container.grid_columnconfigure(0, weight = 1)
+
+		# frames will be a dictionary of the classes that contain pages
 		self.frames = {}
-		for fs in (homePage,li_branch):
+		for fs in (homepage,questionpage):
 			frame = fs(container,self)
 			self.frames[fs] = frame
 			frame.grid(row = 0, column = 0, sticky = "nsew")
-		self.popUp(homePage)
+		self.popUp(homepage)
+	# Void function that hinders the previous page and brings up the given page
+	# that is passed in (cont)
 	def popUp(self,cont):
 		frame = self.frames[cont]
 		frame.tkraise()
-
-class homePage(Frame):
+# Startup Page
+class homepage(Frame):
 
 	def __init__ (self, par, controller):
 		Frame.__init__(self,par)
-		# self =Tk()
+
+		# basic tkinter library definitions of page creation
 		can = Canvas(self,width=400, height=400)
 		can.pack()
 
@@ -46,15 +56,15 @@ class homePage(Frame):
 		line = can.create_line(250,240,240,250,fill="#005bbb")
 		line = can.create_line(240,250,150,250,fill="#005bbb")
 
-		button = Button(self,text="Question Page", command = lambda: controller.popUp(li_branch))
+		button = Button(self,text="Question Page", command = lambda: controller.popUp(questionpage))
 		button.pack(side=RIGHT)
-		# label = tk.Label(self,text = "Start Page", font = ("Verdana", 12))
-		# label.pack(pady= 10, padx=10)
+		
 
-class li_branch(Frame):
+# Page were questions will be distributed
+class questionpage(Frame):
 	def __init__ (self, par, controller):
 		Frame.__init__(self,par)	
-		# self = Tk()
+		# Self exlanatory Page definitions
 		frame1 = Frame(self,width=300,height=300,bg="yellow")
 		frame2 = Frame(self,width=300,height=300,bg="green")
 
@@ -86,7 +96,10 @@ class li_branch(Frame):
 
 		button1.grid(row=6,column=1,sticky="E")
 		label6.grid(row=7,column=0,sticky="W")
-		button3 = Button(self,text="Home Page", command = lambda: controller.popUp(homePage))
+		button3 = Button(self,text="Home Page", command = lambda: controller.popUp(homepage))
 		button3.grid(row = 6, column = 1, sticky = "W")
+
+# initializing and running an infinite loop on genStruc until
+# the frame is shut down
 interface = genStruc()
 interface.mainloop()
