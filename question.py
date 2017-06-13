@@ -1,4 +1,5 @@
 class Question:
+
     def __init__(self, name, rw_model, ideal_model):
         self.name = name
         self.assumptions = {"true" : [], "false" : [], "irrelevant" :[]}
@@ -12,3 +13,20 @@ class Question:
             self.assumptions[truth_value].append(assumption)
         else:
             print "Invalid truth value"
+
+
+
+    # Author: Paata Ugrekhelidze
+    # Allows to get all the values from the data depending what is requested
+    def getVal(value):
+        if (value == "name"):
+            return self.name
+        elif (value == "assumption"):
+            return self.assumption
+        elif (value == "ideal"):
+            return self.ideal_model
+        elif (value == "real"):
+            return self.rw_model
+        else:
+            print "Invalid Input"
+        
