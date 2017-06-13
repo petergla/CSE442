@@ -32,25 +32,24 @@ class Question:
             spacer = " " * (11 - len(tv_string)) + "| "
             print " " +str(item) + " | " + tv_string + spacer + self.assumptions[item].getAssumptionText()
 
-
-    # Author: Paata Ugrekhelidze
-    # Allows to get all the values from the data depending what is requested
     def getName(self):
         return self.name
-        # elif (value == "assumption"):
-        #     return self.assumption
-        # elif (value == "ideal"):
-        #     return self.ideal_model
-        # elif (value == "real"):
-        #     return self.rw_model
-        # else:
-        #     print "Invalid Input"
 
-q = Question("question 1", "test", "test")
-q.addAssumption(TruthValue.true, "This is an assumption")
-q.addAssumption(TruthValue.irrelevant, "This is an assumption that is irrelevant")
-q.addAssumption(TruthValue.irrelevant, "This is another assumption")
-q.addAssumption(TruthValue.false, "This is a false assumption")
-q.removeAssumption(1)
-q.removeAssumption(1)
-q.printAssumptions()
+    def getAssumptions(self):
+        return self.assumptions
+
+    def getIdealizedModel(self):
+        return self.ideal_model
+
+    def getRealWorldModel(self):
+        return self.RealWorldModel
+
+
+# q = Question("question 1", "test", "test")
+# q.addAssumption(TruthValue.true, "This is an assumption")
+# q.addAssumption(TruthValue.irrelevant, "This is an assumption that is irrelevant")
+# q.addAssumption(TruthValue.irrelevant, "This is another assumption")
+# q.addAssumption(TruthValue.false, "This is a false assumption")
+# q.removeAssumption(1)
+# q.removeAssumption(1)
+# q.printAssumptions()
