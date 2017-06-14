@@ -1,26 +1,33 @@
 gifdir = "./"
 from Tkinter import *
 
-def fun1():
-    print(checkboxstatus1.get())
-    print(checkboxstatus2.get())
-    print(checkboxstatus3.get())
-    print(checkboxstatus4.get())
-    print
+def fun1(label):
+    print(checkboxstatus1.get()) #incorrect
+    print(checkboxstatus2.get()) #incorrect
+    print(checkboxstatus3.get()) #correct
+    print(checkboxstatus4.get()) #correct
+
+    answer_key = [0,0,1,1]
+    answers = [checkboxstatus1.get(), checkboxstatus2.get(), checkboxstatus3.get(), checkboxstatus4.get()]
+    score = 0.0
+    for i in range(len(answer_key)):
+        if answer_key[i] == answers[i]:
+            score = score + 1
+    label.configure(text =  "Current grade is " + str((score/4.0)*100.0)  + "%")
 
 root = Tk()
 
-fil1 = 'RealWorld_1.gif' 
+fil1 = 'RealWorld_1.gif'
 img1 = PhotoImage(file=gifdir+fil1)
 scl1 = img1.subsample(3,3)
 # subsample(self, x, y='')
-# Return a new PhotoImage based on the same image as this widget but use only every Xth or Yth pixel. 
+# Return a new PhotoImage based on the same image as this widget but use only every Xth or Yth pixel.
 can1 = Canvas(root)
 can1.config(width=scl1.width(),height=scl1.height())
 can1.create_image(0,0,image=scl1,anchor=NW)
 can1.grid(row=0,column=0)
 
-fil2 = 'IdealizedModel1_1.gif' 
+fil2 = 'IdealizedModel1_1.gif'
 img2 = PhotoImage(file=gifdir+fil2)
 scl2 = img2.subsample(3,3)
 can2 = Canvas(root)
@@ -50,7 +57,7 @@ check4.grid(row=5,column=0,sticky=W)
 labelg = Label(root,text="Current grade is ---")
 labelg.grid(row=7,column=0,sticky=W)
 
-buttons = Button(root,text="Submit Answer",command=fun1)
+buttons = Button(root,text="Submit Answer",command=lambda: fun1(labelg))
 buttons.grid(row=6,column=2,sticky=E)
 
 root.mainloop()
