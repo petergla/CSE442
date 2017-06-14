@@ -1,11 +1,13 @@
-from Tkinter import *
+from Tkinter import *        
+from PIL import ImageTk, Image
 
-root = Tk()
+app_root = Tk()
+app_root.resizable(width=True, height=True)
+#Setting it up
 
-imgPath = "RealWorld1.gif"  #file name 
-photo = PhotoImage(file = imgPath) 
-label = Label(image = photo)
-label.image = photo # keep a reference!
-label.grid(row = 3, column = 1, padx = 5, pady = 5)
+img = ImageTk.PhotoImage(Image.open("RealWorld.png"))
+#Displaying it
+imglabel = Label(app_root, image=img).grid(row=0, column=0)
 
-root.mainloop()
+
+app_root.mainloop()
