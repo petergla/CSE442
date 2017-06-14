@@ -17,6 +17,7 @@ def fun1(label):
     label.configure(text =  "Current grade is " + str((score/4.0)*100.0)  + "%")
 
 root = Tk()
+root.resizable(width=True, height=True)
 root.wm_title("CodeBusters' Learning Environment")   #change window name
 fil1 = 'RealWorld_1.gif'
 img1 = PhotoImage(file=gifdir+fil1)
