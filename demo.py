@@ -56,7 +56,7 @@ assumpttion2.grid(row=3,column=1,sticky=W)
 assumpttion3.grid(row=4,column=1,sticky=W)
 assumpttion4.grid(row=5,column=1,sticky=W)
 
-labelg = Label(root,text="Current Grade  ",fg='black',bg='skyblue', font=('times',15), height=1/2,width=18)
+labelg = Label(root,text="Current Grade  ",fg='green',bg='black', font=('times',15), height=1/2,width=18)
 labelg.grid(row=0,column=0,sticky=NW)
 buttons = Button(root,text="Submit Answer",fg='white',bg='green',command=lambda: getScore(labelg))
 buttons.grid(row=6,column=1,sticky=W)
