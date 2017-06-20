@@ -1,13 +1,13 @@
-{Question 1
-(Assumption 1, True)
-(Assumption 2, True)
-(Assumption 3, False)[True Thing][False thing, another false thing, the third false thing]
-(Assumption 4, False)[True Assumption][wrong, Wrong, very wrong]
+{Question 1; img1.gif; img2.gif
+(Assumption 1; T)
+(Assumption 2; T)
+(Assumption 3; F)[True Thing][False thing; another false thing; the third false thing]
+(Assumption 4; F)[True reason][wrong; Wrong; very wrong]
 }
 
-{Question 2
-(Assumption 1, Irrelevant)
-(Assumption 2, True)
-(Assumption 3, True)
-(Assumption 4, False)[True Assumption][wrong, Wrong, very wrong]
+{Question 2; img3.gif; img4.gif
+(Assumption 1; I)
+(Assumption 4; F)[True][wrong, Wrong, very wrong]
+(Assumption 2; T)
+(Assumption 3; T)
 }
