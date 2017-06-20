@@ -16,22 +16,25 @@ def submisson(frame,labelg,checkboxstatus1,checkboxstatus2,checkboxstatus3,check
         if answer_key[i] == answers[i]:
             score = score+1
     labelg.config(text='Current Grade is '+str(score))
-    assumpttion1.config(fg='red')
-    assumpttion2.config(fg='red')
-    assumpttion3.config(fg='green')
-    assumpttion4.config(fg='green')
     if answers[0] == 1:
         if answer_key[0] != answers[0]:
+            assumpttion1.config(fg='red')
             radiobutton1.grid(row=2,column=0,padx=25,sticky='W')
             radiobutton2.grid(row=3,column=0,padx=25,sticky='W')
             radiobutton3.grid(row=4,column=0,padx=25,sticky='W')
     if answers[1] == 1:
         if answer_key[1] != answers[1]:
+            assumpttion2.config(fg='red')
             radiobutton4.grid(row=6,column=0,padx=25,sticky='W')
             radiobutton5.grid(row=7,column=0,padx=25,sticky='W')
             radiobutton6.grid(row=8,column=0,padx=25,sticky='W')
             radiobutton7.grid(row=9,column=0,padx=25,sticky='W')
-
+    if answers[2] == 1:
+        if answer_key[2] == answers[2]:
+            assumpttion3.config(fg='green')
+    if answers[3] == 1:
+        if answer_key[3] == answers[3]:
+            assumpttion4.config(fg='green')
 root = Tk()
 
 # image1
