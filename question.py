@@ -13,7 +13,7 @@ class Question:
     # Author: PJ Glasheen
     # Allows assumptions to be entered into the question class.
     def addAssumption(self,assumption):
-        
+
         self.assumptions.append(assumption)
 
     # Author: PJ Glasheen

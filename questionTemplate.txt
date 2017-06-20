@@ -1,0 +1,15 @@
+Template:
+
+{Question Name; path to real world model; path to idealized model
+(Assumption Text; Truth Value represented by T, I, or F)
+(Assumption Text; Truth Value)[True Reason][False Reason; False Reason; False Reason]
+}
+
+Example:
+
+{Question 2; img3.gif; img4.gif
+(Assumption 1; I)
+(Assumption 2; T)
+(Assumption 3; T)
+(Assumption 4; F)[True thing][wrong thing; Wrong; very wrong thing]
+}
