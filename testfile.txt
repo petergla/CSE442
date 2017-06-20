@@ -1,0 +1,13 @@
+{Question 1
+(Assumption 1, True)
+(Assumption 2, True)
+(Assumption 3, False)[True Thing][False thing, another false thing, the third false thing]
+(Assumption 4, False)[True Assumption][wrong, Wrong, very wrong]
+}
+
+{Question 2
+(Assumption 1, Irrelevant)
+(Assumption 2, True)
+(Assumption 3, True)
+(Assumption 4, False)[True Assumption][wrong, Wrong, very wrong]
+}
