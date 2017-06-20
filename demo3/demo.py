@@ -2,7 +2,7 @@ gifdir = "./"
 from Tkinter import *
 
 
-def fun1(label):
+def getScore(label):
     print(checkboxstatus1.get()) #incorrect
     print(checkboxstatus2.get()) #incorrect
     print(checkboxstatus3.get()) #correct
@@ -35,10 +35,10 @@ scl2 = img2.subsample(3,3)
 can2 = Canvas(root)
 can2.config(width=scl2.width(),height=scl2.height())
 can2.create_image(0,0,image=scl2,anchor=NW)
-can2.grid(row=0,column=2)
+can2.grid(row=0,column=1)
 
 labelq = Label(root,text="Please select the correct assumptions:",fg='blue')
-labelq.grid(row=1,column=0,sticky=W)
+labelq.grid(row=1,column=1,sticky=W)
 
 checkboxstatus1 = IntVar()
 checkboxstatus2 = IntVar()
@@ -47,20 +47,19 @@ checkboxstatus4 = IntVar()
 # checkboxstatus hold the status of checkbox
 # use .get() to get status.
 # 1 for a check, 0 for no check.
-check1 = Checkbutton(root, text="Hip acts as a pivot point (no lifting off the bed)",fg='blue',variable=checkboxstatus1)
-check2 = Checkbutton(root, text="Lower leg remains approximately perpendicular to upper leg",fg='blue',variable=checkboxstatus2)
-check3 = Checkbutton(root, text="Forces are reasonably approximated using static analysis",fg='blue',variable=checkboxstatus3)
-check4 = Checkbutton(root, text="Patient does not slide on the bed",fg='blue',variable=checkboxstatus4)
-check1.grid(row=2,column=0,sticky=W)
-check2.grid(row=3,column=0,sticky=W)
-check3.grid(row=4,column=0,sticky=W)
-check4.grid(row=5,column=0,sticky=W)
+assumpttion1 = Checkbutton(root, text="Hip acts as a pivot point (no lifting off the bed)",fg='blue',variable=checkboxstatus1)
+assumpttion2 = Checkbutton(root, text="Lower leg remains approximately perpendicular to upper leg",fg='blue',variable=checkboxstatus2)
+assumpttion3 = Checkbutton(root, text="Forces are reasonably approximated using static analysis",fg='blue',variable=checkboxstatus3)
+assumpttion4 = Checkbutton(root, text="Patient does not slide on the bed",fg='blue',variable=checkboxstatus4)
+assumpttion1.grid(row=2,column=1,sticky=W)
+assumpttion2.grid(row=3,column=1,sticky=W)
+assumpttion3.grid(row=4,column=1,sticky=W)
+assumpttion4.grid(row=5,column=1,sticky=W)
 
-labelg = Label(root,text="Current grade is ---",fg='white',bg='skyblue')
-labelg.grid(row=7,column=0,sticky=W)
-
-buttons = Button(root,text="Submit Answer",fg='white',bg='green',command=lambda: fun1(labelg))
-buttons.grid(row=6,column=2,sticky=E)
+labelg = Label(root,text="Current Grade  ",fg='green',bg='black', font=('times',15), height=1/2,width=18)
+labelg.grid(row=0,column=0,sticky=NW)
+buttons = Button(root,text="Submit Answer",fg='white',bg='green',command=lambda: getScore(labelg))
+buttons.grid(row=6,column=1,sticky=W)
 
 root.mainloop()
 
