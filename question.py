@@ -42,7 +42,7 @@ class Question:
         return self.ideal_model
 
     def getRealWorldModel(self):
-        return self.RealWorldModel
+        return self.rw_model
 
 
 # q = Question("question 1", "test", "test")

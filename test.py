@@ -4,13 +4,17 @@ from question import Question
 import random
 # Author: Paata Ugrekhelidze
 
-# This class is designed to perform unit tests over the major testable functions
+
+# returns a unique assumption
 def get_random_assumption():
     Numerical_truth_value = random.randint(0,2) #always randomize truthvalues and texts for every test run
     assumption_text = 'Lorem Ipsum{}'.format(random.randint(0,1000))
     reason_list = [(bool(random.getrandbits(1)),'Lorem Ipsum{}'.format(random.randint(0,1000))),(bool(random.getrandbits(1)), 'Lorem Ipsum{}'.format(random.randint(0,1000)))] #always randomize boolean values for reason list
     temp_assumption = Assumption(Numerical_truth_value,assumption_text,reason_list)
     return temp_assumption
+
+# This class is designed to perform unit tests over the major testable functions
+
 class MyTest(unittest.TestCase):
 	# test cases for assumption library
 	# tests getTruthValue function from assumption library
@@ -50,17 +54,70 @@ class MyTest(unittest.TestCase):
         self.temp_question.addAssumption(self.temp_assumption1)
         self.assertEqual(self.temp_question.assumptions[-1].getAssumptionText(), self.temp_assumption1.getAssumptionText())
     
-    # def test_removeAssumption(self):
+    # test whether an assumption is properly removed
+    def test_removeAssumption(self):
+        # temporary assumptions
+        self.temp_assumption = get_random_assumption()
+        self.temp_assumption1 = get_random_assumption()
+        self.assumptions = [self.temp_assumption,self.temp_assumption1]
+        # temporary question
+        self.name = "Lorem Ipsum{}".format(random.randint(0,1000)) # randomize string inputs
+        self.rw_model = "Lorem Ipsum{}".format(random.randint(0,1000))
+        self.ideal_model = "Lorem Ipsum{}".format(random.randint(0,1000))
+        self.temp_question = Question(self.name,self.rw_model,self.ideal_model,self.assumptions)
+        randomizer = random.randint(0,1)
+        self.target_assumption = self.assumptions[randomizer-1]
+        
+        self.temp_question.removeAssumption(randomizer)
 
-    # def test_printAssumptions(self):
-
-    # def test_getName(self):
-
-    # def test_getAssumptions(self):
-
-    # def test_getIdealizedModel(self):
-
-    # def test_getRealWorldModel(self):
+        # compare the assumption text of what was now removed
+        self.assertEqual(self.temp_question.assumptions[0].getAssumptionText(), self.target_assumption.getAssumptionText())
+            
+    
+    # test whether a name could be retrieved
+    def test_getName(self):
+        self.temp_assumption = get_random_assumption()
+        self.temp_assumption1 = get_random_assumption()
+        self.assumptions = [self.temp_assumption,self.temp_assumption1]
+        # temporary question
+        self.name = "Lorem Ipsum{}".format(random.randint(0,1000)) # randomize string inputs
+        self.rw_model = "Lorem Ipsum{}".format(random.randint(0,1000))
+        self.ideal_model = "Lorem Ipsum{}".format(random.randint(0,1000))
+        self.temp_question = Question(self.name,self.rw_model,self.ideal_model,self.assumptions)
+        self.assertEqual(self.temp_question.getName(),self.name)
+    # check whether assumptions list could be retrieved with a right order
+    def test_getAssumptions(self):
+        self.temp_assumption = get_random_assumption()
+        self.temp_assumption1 = get_random_assumption()
+        self.assumptions = [self.temp_assumption,self.temp_assumption1]
+        # temporary question
+        self.name = "Lorem Ipsum{}".format(random.randint(0,1000)) # randomize string inputs
+        self.rw_model = "Lorem Ipsum{}".format(random.randint(0,1000))
+        self.ideal_model = "Lorem Ipsum{}".format(random.randint(0,1000))
+        self.temp_question = Question(self.name,self.rw_model,self.ideal_model,self.assumptions)
+        self.assertEqual(self.temp_question.getAssumptions(),self.assumptions)
+    # test whether ideal model image path cpuld be retrieved
+    def test_getIdealizedModel(self):
+        self.temp_assumption = get_random_assumption()
+        self.temp_assumption1 = get_random_assumption()
+        self.assumptions = [self.temp_assumption,self.temp_assumption1]
+        # temporary question
+        self.name = "Lorem Ipsum{}".format(random.randint(0,1000)) # randomize string inputs
+        self.rw_model = "Lorem Ipsum{}".format(random.randint(0,1000))
+        self.ideal_model = "Lorem Ipsum{}".format(random.randint(0,1000))
+        self.temp_question = Question(self.name,self.rw_model,self.ideal_model,self.assumptions)
+        self.assertEqual(self.temp_question.getIdealizedModel(),self.ideal_model)
+    # test wheter realworld image path could be retrieved
+    def test_getRealWorldModel(self):
+        self.temp_assumption = get_random_assumption()
+        self.temp_assumption1 = get_random_assumption()
+        self.assumptions = [self.temp_assumption,self.temp_assumption1]
+        # temporary question
+        self.name = "Lorem Ipsum{}".format(random.randint(0,1000)) # randomize string inputs
+        self.rw_model = "Lorem Ipsum{}".format(random.randint(0,1000))
+        self.ideal_model = "Lorem Ipsum{}".format(random.randint(0,1000))
+        self.temp_question = Question(self.name,self.rw_model,self.ideal_model,self.assumptions)
+        self.assertEqual(self.temp_question.getRealWorldModel(),self.rw_model)
 
 
 
