@@ -125,6 +125,8 @@ question2 = Question("First Example",'./IdealizedModel1_1.gif','./RealWorld_1.gi
 questionlist = [question1,question2]
 
 root = Tk()
+label1=root.wm_title("CodeBusters' Learning Environment")   #change window name
+
 '''
 # current queston number
 currentquestion = 0
