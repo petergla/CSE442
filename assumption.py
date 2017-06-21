@@ -16,3 +16,6 @@ class Assumption:
 
     def getAssumptionText(self):
         return self.assumption_text
+    
+    def getReasons(self):
+        return self.reason_list
