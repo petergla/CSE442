@@ -92,8 +92,8 @@ def makelayouttakenquestionobject(root,question):
     # 10 pixels around image
     # 50 pixels reserve for label
     can = Canvas(root,width=scl1.width()+scl2.width()+30,height=max(scl1.height(),scl2.height())+20)
-    can.create_image(10,10+50,image=scl1,anchor=NW)
-    can.create_image(20+scl1.width(),10+50,image=scl2,anchor=NW)
+    can.create_image(10,10+75,image=scl1,anchor=NW)
+    can.create_image(20+scl1.width(),10+75,image=scl2,anchor=NW)
     can.pack()
 
     # grade label
@@ -161,7 +161,7 @@ questionlist = readFile('example_questions.txt')
 
 root = Tk()
 
-makelayouttakenquestionobject(root,questionlist[0])
+makelayouttakenquestionobject(root,questionlist[1])
 
 root.mainloop()
 
