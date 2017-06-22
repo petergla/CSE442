@@ -161,7 +161,7 @@ questionlist = readFile('example_questions.txt')
 
 root = Tk()
 
-makelayouttakenquestionobject(root,questionlist[1])
+makelayouttakenquestionobject(root,questionlist[0])
 
 root.mainloop()
 
