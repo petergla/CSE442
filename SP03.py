@@ -11,32 +11,18 @@ def resizephotoimagewithin1000pixel(img):
         img = img.subsample(2,2)
     return img
 
-def submisson(answer,answerkey,gridlist):
-
-    # show hidden 
-    for x in xrange(0,len(gridlist)):
-        gridlist[x].grid()
+def submisson(labelg,answer,gridlist,reasonsdropreferencetable):
+    print 
     
-    score = 0.0
-    for x in xrange(0,len(answer)):
-        if answer[x]==1:
-            print 
-    
-    print 'need to write something here'
 
 def makelayouttakenquestionobject(root,question):
     
-    # current queston number
-    currentquestion = 0
-
     # image1
-    fil1 = question.getRealWorldModel()
-    img1 = PhotoImage(file=fil1)
+    img1 = PhotoImage(file=question.getRealWorldModel())
     scl1 = resizephotoimagewithin1000pixel(img1)
 
     # image2
-    fil2 = question.getIdealizedModel()
-    img2 = PhotoImage(file=fil2)
+    img2 = PhotoImage(file=question.getIdealizedModel())
     scl2 = resizephotoimagewithin1000pixel(img2)
 
     # canvas
@@ -48,53 +34,68 @@ def makelayouttakenquestionobject(root,question):
     can.create_image(20+scl1.width(),10+50,image=scl2,anchor=NW)
     can.pack()
 
+    # grade label
+    labelg = Label(root,text="Current Grade is ---",font="Helvetica 36 bold",fg='black')
+    labelg.place(x=0,y=0)
+
     # frame
     # width = image1 + image 2
     frame = Frame(root,width=(scl1.width()+scl2.width())/2,height=100)
     frame.pack()
- 
+
     # problem label
     labelq = Label(frame,text='Assumptions',font="Helvetica 16 bold",pady=25).grid(row=0,column=0,sticky=W)
 
-    # anwer list
+    # answer list
     answer = []
-    for x in xrange(0,len(question.getAssumptions())):
+    howmanyassumptionsinquestion = len(question.getAssumptions())
+    for x in xrange(0,howmanyassumptionsinquestion):
         checkboxstatus = IntVar()
-        answer.append(checkboxstatus)
-
-    # anwerkey list
-    answerkey = []
-    for x in xrange(0,len(question.getAssumptions())):
-        answer.append(question.getAssumptions()[x].getTruthValue())
-    
-    # reason instance list
-    reasonselection = []
-    for x in xrange(0,len(question.getAssumptions())):
         reasoninstance = IntVar()
-        reasonselection.append(reasoninstance)
+        answer.append([checkboxstatus,reasoninstance])
 
-    r = 1   # row number
+    # reasons drop reference table
+    r = 1   # plae counter
+    reasonsdropreferencetable = []
+    for x in xrange(0,howmanyassumptionsinquestion):
+        rowcurrent = r
+        row = [rowcurrent]
+        r = r+1
+        howmanyreasonsinassumption = len(question.getAssumptions()[x].getReasons())
+        for y in xrange(0,howmanyreasonsinassumption):
+            columncurrent = r
+            row.append(columncurrent)
+            r = r+1
+        reasonsdropreferencetable.append(row)
 
     # list of element on grid
     gridlist = []
-    for x in xrange(0,len(question.getAssumptions())):
-        assumpttion = Checkbutton(frame,text=question.getAssumptions()[x].getAssumptionText(),variable=answer[x])
+    r = 1   # place counter
+    for x in xrange(0,howmanyassumptionsinquestion):
+        assumpttion = Checkbutton(frame,text=question.getAssumptions()[x].getAssumptionText(),variable=answer[x][0])
         gridlist.append(assumpttion)
         gridlist[r-1].grid(row=r,sticky=W)
         r = r+1
-        for y in xrange(0,len(question.getAssumptions()[x].getReasons())):
-            radiobutton = Radiobutton(frame,text=question.getAssumptions()[x].getReasons()[y][1],variable=reasonselection[x],value=y+1)
+        howmanyreasonsinassumption = len(question.getAssumptions()[x].getReasons())
+        for y in xrange(0,howmanyreasonsinassumption):
+            radiobutton = Radiobutton(frame,text=question.getAssumptions()[x].getReasons()[y][1],variable=answer[x][1],value=y+1)
             gridlist.append(radiobutton)
             gridlist[r-1].grid(row=r,padx=25,sticky=W)
-            gridlist[r-1].grid_remove()     # grid_remove() does not remove component from grid, it hides it, grid() makes it showing again 
+            #gridlist[r-1].grid_remove()     # grid_remove() does not remove component from grid, it hides it, grid() makes it showing again
             r = r+1
 
-    #submit button
-    buttons = Button(frame,text="Submit Answer",command=lambda: submisson(answer,answerkey,gridlist))
+    # submit button
+    buttons = Button(frame,text="Submit Answer",command=lambda:submisson(labelg,answer,gridlist,reasonsdropreferencetable))
     buttons.grid(row=r,pady=25)
 
 
         
+
+
+
+
+
+
     
 # making question list example manually  
 # assumption 1
@@ -125,8 +126,6 @@ question2 = Question("First Example",'./IdealizedModel1_1.gif','./RealWorld_1.gi
 questionlist = [question1,question2]
 
 root = Tk()
-label1=root.wm_title("CodeBusters' Learning Environment")   #change window name
-
 '''
 # current queston number
 currentquestion = 0
@@ -148,6 +147,10 @@ can.create_image(10,10+50,image=scl1,anchor=NW)
 can.create_image(20+scl1.width(),10+50,image=scl2,anchor=NW)
 can.pack()
 
+# grade label
+labelg = Label(root,text="Current Grade is ---",font="Helvetica 36 bold",fg='black')
+labelg.place(x=0,y=0)
+
 # frame
 # width = image1 + image 2
 frame = Frame(root,width=(scl1.width()+scl2.width())/2,height=100)
@@ -156,36 +159,51 @@ frame.pack()
 # problem label
 labelq = Label(frame,text='Assumptions',font="Helvetica 16 bold",pady=25).grid(row=0,column=0,sticky=W)
 
-# anwer list
+# answer list
 answer = []
-for x in xrange(0,len(questionlist[currentquestion].getAssumptions())):
+howmanyassumptionsinquestion = len(question1.getAssumptions())
+for x in xrange(0,howmanyassumptionsinquestion):
     checkboxstatus = IntVar()
-    answer.append(checkboxstatus)
-
-# reason instance list
-reasonselection = []
-for x in xrange(0,len(questionlist[currentquestion].getAssumptions())):
     reasoninstance = IntVar()
-    reasonselection.append(reasoninstance)
+    answer.append([checkboxstatus,reasoninstance])
 
-r = 1   # row number
+# reasons drop reference table
+r = 1   # plae counter
+reasonsdropreferencetable = []
+for x in xrange(0,howmanyassumptionsinquestion):
+    rowcurrent = r
+    row = [rowcurrent]
+    r = r+1
+    howmanyreasonsinassumption = len(question1.getAssumptions()[x].getReasons())
+    for y in xrange(0,howmanyreasonsinassumption):
+        columncurrent = r
+        row.append(columncurrent)
+        r = r+1
+    reasonsdropreferencetable.append(row)
+
+
+
+
+
 
 # list of element on grid
 gridlist = []
-for x in xrange(0,len(questionlist[currentquestion].getAssumptions())):
-    assumpttion = Checkbutton(frame,text=questionlist[currentquestion].getAssumptions()[x].getAssumptionText(),variable=answer[x])
+r = 1   # place counter
+for x in xrange(0,howmanyassumptionsinquestion):
+    assumpttion = Checkbutton(frame,text=question1.getAssumptions()[x].getAssumptionText(),variable=answer[x][0])
     gridlist.append(assumpttion)
     gridlist[r-1].grid(row=r,sticky=W)
     r = r+1
-    for y in xrange(0,len(questionlist[currentquestion].getAssumptions()[x].getReasons())):
-        radiobutton = Radiobutton(frame,text=questionlist[currentquestion].getAssumptions()[x].getReasons()[y][1],variable=reasonselection[x],value=y+1)
+    howmanyreasonsinassumption = len(question1.getAssumptions()[x].getReasons())
+    for y in xrange(0,howmanyreasonsinassumption):
+        radiobutton = Radiobutton(frame,text=question1.getAssumptions()[x].getReasons()[y][1],variable=answer[x][1],value=y+1)
         gridlist.append(radiobutton)
         gridlist[r-1].grid(row=r,padx=25,sticky=W)
-        #gridlist[r-1].grid_remove()     # grid_remove() does not remove component from grid, it hides it, grid() makes it showing again 
+        gridlist[r-1].grid_remove()     # grid_remove() does not remove component from grid, it hides it, grid() makes it showing again
         r = r+1
 
 # submit button
-buttons = Button(frame,text="Submit Answer",command=lambda: submisson())
+buttons = Button(frame,text="Submit Answer",command=lambda: submisson(labelg))
 buttons.grid(row=r,pady=25)
 '''
 
