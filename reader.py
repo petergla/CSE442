@@ -23,7 +23,7 @@ def parseFirstLine(line):
     while len(line) > index: #Reads idealized model path until end of line is reached
         idealModelPath = idealModelPath + line[index]
         index = index + 1
-    question = Question(questionName, rwModelPath, idealModelPath, [])
+    question = Question(questionName, rwModelPath, idealModelPath[:-1], [])
     return question
 
 # Author: PJ Glasheen
@@ -68,7 +68,7 @@ def parseAssumption(line):
                 index = index + 1
             reasonList.append((False,reason))
             index = index + 1
-        assum = Assumption(TruthValue.false, assText, reasonList)
+        assum = Assumption(TruthValue.false, assText, reasonList[:-1])
         return assum #return the false assumption
 
 # Author: PJ Glasheen
