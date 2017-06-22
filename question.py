@@ -12,9 +12,9 @@ class Question:
 
     # Author: PJ Glasheen
     # Allows assumptions to be entered into the question class.
-    def addAssumption(self,truth_value, assumption_text, reason_list = []):
-        newAssumption = Assumption(truth_value, assumption_text, reason_list)
-        self.assumptions.append(newAssumption)
+    def addAssumption(self,assumption):
+
+        self.assumptions.append(assumption)
 
     # Author: PJ Glasheen
     # remove an assumption from the assumption list by its index
@@ -42,7 +42,7 @@ class Question:
         return self.ideal_model
 
     def getRealWorldModel(self):
-        return self.RealWorldModel
+        return self.rw_model
 
 
 # q = Question("question 1", "test", "test")
