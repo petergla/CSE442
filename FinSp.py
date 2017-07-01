@@ -43,7 +43,7 @@ def makelayout(score,root,questionlist):
     can.grid(row=1,sticky=W)
 
     # question label
-    labelq = Label(frame1,text='Assumptions',font="Helvetica 16 bold",pady=25)
+    labelq = Label(frame1,text=question.getName(),font="Helvetica 16 bold",pady=25)
     labelq.grid(row=2)
     
     # frame for assumptions and reasons
