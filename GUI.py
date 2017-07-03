@@ -63,7 +63,7 @@ def makelayout(score,root,questionlist):
     frame2 = Frame(root,width=(img1.width()+img2.width())/2,height=100)
     frame2.pack()
 
-    # list of values(int) that store answers(1 of 0) for each checkbox:
+    # list of values(int) that store answers(1 or 0) for each checkbox:
     checkboxanswer = []
     # amount of assumptions in total
     Nassumptions = len(question.getAssumptions())
@@ -71,7 +71,7 @@ def makelayout(score,root,questionlist):
         checkboxvalue = IntVar()
         checkboxanswer.append(checkboxvalue)
 
-    # list of values(int) that store answers(1 of 0) for each radiobutton:
+    # list of values(int) that store answers(1 or 0) for each radiobutton:
     radiobuttonanswer = []
     Nassumptions = len(question.getAssumptions())
     for x in xrange(0,Nassumptions):
