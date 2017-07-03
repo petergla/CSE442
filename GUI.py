@@ -5,12 +5,14 @@ from truthvalue import TruthValue
 from reader import readFile
 
 
-
+# resizes images until height and width are both less than 1000 pixels
 def resizephotoimagewithin1000pixel(img):
     while (img.height()>1000 or img.width()>1000):
+        # scale it down
         img = img.subsample(2,2)
     return img
-# sets up the questions before it is passed to the function that displays the frame
+
+# instatiates variables for the GUI and checks if all the credentials are met to display the material onto the window
 def setuptakenquestionlist(questionlist):
     # score begins initially from 0
     score = 0.0
