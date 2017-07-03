@@ -122,7 +122,9 @@ def makelayout(score,root,questionlist):
     buttons = Button(frame2,text="Submit Answer",command=lambda:firstsubmission(score,root,labelg,checkboxanswer,radiobuttonanswer,questionlist,gridlist,rowstorage,frame1,frame2))
     gridlist.append(buttons)
     gridlist[len(gridlist)-1].grid(row=len(gridlist)-1,pady=25)
-
+# submissions take care of two submission processes:
+# first sumbission is calculating the assumptions that were submitted
+# second submission is calculating the reasons(if they exist) that were submitted
 def firstsubmission(score,root,labelg,checkboxanswer,radiobuttonanswer,questionlist,gridlist,rowstorage,frame1,frame2):
     # get the first question
     question = questionlist[0]        
@@ -182,65 +184,57 @@ def firstsubmission(score,root,labelg,checkboxanswer,radiobuttonanswer,questionl
         
   
 def secondsubmission(score,root,labelg,checkboxanswer,radiobuttonanswer,questionlist,gridlist,rowstorage,frame1,frame2):
-
+    # get the first question
     question = questionlist[0]
 
-    # loop checkbox answer
+    # loop through checkbox answers
     for x in xrange(0,len(checkboxanswer)):
         
-        # if checkbox selected
+        # if checkbox was selected
         if checkboxanswer[x].get()==1:
 
-            # loop reasons
+            # loop throgh the assumption reasons
             Nreasons = len(question.getAssumptions()[x].getReasons())
             for y in xrange(1,Nreasons+1):
 
-                # change radiobutton to label
-                label = Label(frame2,text=question.getAssumptions()[x].getReasons()[y-1][1])
-                gridlist[rowstorage[x][y]].grid_forget()
-                gridlist[rowstorage[x][y]] = label
-                gridlist[rowstorage[x][y]].grid(row=rowstorage[x][y],padx=25,sticky=W)
-
-                # if assumption correct
+                # if reason is correct
                 if question.getAssumptions()[x].getReasons()[y-1][0]==1:
 
-                    # if selected is correct
+                    # if the radiobutton was selected: update the score
                     if radiobuttonanswer[x].get()==y:
+                        # increment the current score
                         score = score+0.11
+                        # update the label
                         labelg.config(text='Current Grade is '+str(score))
 
-                    # if selected is not correct 
-                    elif radiobuttonanswer[x].get()!=y:
-                        print
-                        #gridlist[rowstorage[x][y]].config(fg='gray')
-
-                # if assumption is not correct 
+                # if reason is not correct 
                 elif question.getAssumptions()[x].getReasons()[y-1][0]==0:
 
-                    # if selected is correct: drop reason
+                    # if the radiobutton was selected: strike it
                     if radiobuttonanswer[x].get()==y:
                         gridlist[rowstorage[x][y]].config(font='Helvetica 8 overstrike')
                         
-                    # if selected is not correct
+                    # if the radiobutton was not selected: gray it out
                     elif radiobuttonanswer[x].get()!=y:
-                        print
                         gridlist[rowstorage[x][y]].config(fg='gray')
 
-    # change submit button function and text
+    # change submit button function and text to "Next Question"
     gridlist[len(gridlist)-1].config(text='Next Question',command=lambda:nextquestion(score,root,labelg,checkboxanswer,radiobuttonanswer,questionlist,gridlist,rowstorage,frame1,frame2)) 
 
 def nextquestion(score,root,labelg,checkboxanswer,radiobuttonanswer,questionlist,gridlist,rowstorage,frame1,frame2):
-    
-    if len(questionlist)==1:
-        gridlist[len(gridlist)-1].config(command=lambda:endingpage(score,root,labelg,checkboxanswer,radiobuttonanswer,questionlist,gridlist,rowstorage,frame1,frame2)) 
-
-    elif len(questionlist)>1:
-        frame1.destroy()
-        frame2.destroy()
-        del questionlist[0]
+    # get rid all the layout in the window which is basically everything in frame 1 and 2
+    frame1.destroy()
+    frame2.destroy()
+    # get rid of the question that we just had
+    del questionlist[0]
+    # if there is no question left then call the function for the final page
+    if len(questionlist) == 0:
+        finishpage(score,root)
+    # if there is still some question left then recall the makelayout function that will display a new question
+    elif len(questionlist)>0:
         makelayout(score,root,questionlist)
-
-def endingpage(score,root,labelg,checkboxanswer,radiobuttonanswer,questionlist,gridlist,rowstorage,frame1,frame2):
+# function for the final page layout
+def finishpage(score,root):
     print "this is the final page"
     
 
