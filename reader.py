@@ -56,7 +56,7 @@ def readReason(line):
         index = index + 1
         # print reasonText
     while reasonText[-1] == " ": #removes trailing spaces
-        reasonText = assText[:-1]
+        reasonText = reasonText[:-1]
     index = index + 1
     while line[index] == " ":
         index = index + 1
