@@ -12,3 +12,13 @@ Reason: Invalid Reason #1.2.3 | False
 Reason: Valid Reason #1.2.4 | True
 Assumption: Forces are reasonably approximated using static analysis | True
 Assumption: Patient does not slide on the bed | True
+
+Question: Question 2
+Idealized Model: q2a.gif
+Real World Model: q2b.gif
+Assumption: A true assumption | True
+Assumption: A false assumption | False
+Reason: A true reason | True
+Reason: A false reason | False
+Reason: Another false reason | False
+Assumption: Another true assumption | True
