@@ -2,6 +2,7 @@ from question import Question
 from assumption import Assumption
 from truthvalue import TruthValue
 
+# Reads a line of the text file that begins with question and returns string of question name
 def readQuestion(line):
     index = 9 #Index of the string where the question name begins
     while line[index] == " ":
@@ -9,16 +10,19 @@ def readQuestion(line):
     # print line[index:]
     return line[index:-1] #returns the question name & deletes the \n char at the end
 
+# Reads line that is an image path and returns string of image path
 def readImgPath(imgType, line):
     index = 0
+    #changes index of where path begins depending on whether it is RW or Ideal image
     if imgType == "I":
-        index = 16
+        index = 16 #if the line begins with "idealized image" the name of the path would not begin until index 16
     elif imgType == "R":
-        index = 17
+        index = 17 #16 for rw model
     while line[index] == " ":
         index = index + 1
-    return line[index:-1]
+    return line[index:-1] #returns string excluding the last \n char
 
+#returns reads assumption line and returns an assumption with the text & truth value
 def readAssumption(line):
     index = 11
     assText = ""
@@ -36,10 +40,10 @@ def readAssumption(line):
     elif line[index] == "F":
         return Assumption(TruthValue.false, assText, [])
     else:
-        print "The letter is " + line[index]
-        reasonList = []
-        return Assumption(TruthValue.irrelevant, assText, reasonList)
+        return Assumption(TruthValue.irrelevant, assText, [])
 
+
+#reads a reason line and returns a tuple of (bool, reason text)
 def readReason(line):
     # print "AAAAAAAAAAAAAAA"
     index = 7
@@ -58,6 +62,7 @@ def readReason(line):
     else:
         return (False, reasonText)
 
+#main function
 def readFile(filename):
     questionList = []
     questionfile = open(filename, "r")
@@ -84,8 +89,8 @@ def readFile(filename):
             reason = readReason(line)
             assumptions[-1].add_reason(reason[0], reason[1])
     questionList.append(Question(questionName, realWorldModel, idealizedModel, assumptions))
-    questionList[0].printAssumptions()
-    print len(questionList)
+    # questionList[0].printAssumptions()
+    # print len(questionList)
     return questionList
 
 
