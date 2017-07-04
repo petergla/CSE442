@@ -31,7 +31,8 @@ def readAssumption(line):
     while line[index] != "|":
         assText = assText + line[index]
         index = index + 1
-    # print line[index]
+    while assText[-1] == " ": #removes trailing spaces
+        assText = assText[:-1]
     index = index + 1
     while line[index] == " ":
         index = index + 1
@@ -54,6 +55,8 @@ def readReason(line):
         reasonText = reasonText + line[index]
         index = index + 1
         # print reasonText
+    while reasonText[-1] == " ": #removes trailing spaces
+        reasonText = assText[:-1]
     index = index + 1
     while line[index] == " ":
         index = index + 1
