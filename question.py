@@ -4,12 +4,13 @@ from assumption import Assumption
 
 class Question:
 
-    def __init__(self, name, rw_model, ideal_model, assumptions = [], assumptionWeight = 4, reasonWeight = 1):
+    def __init__(self, name, rw_model, ideal_model, assumptions = [], correctAssumptionWeight = 4, wrongAssumptionWeight = 0, reasonWeight = 1):
         self.name = name #name of the question
         self.assumptions = assumptions #list of assumptions. Defaults to empty list.
         self.rw_model = rw_model #String of path to real world model image
         self.ideal_model = ideal_model #String of path to idealized model image
-        self.assumptionWeight = assumptionWeight #weight of assumption
+        self.correctAssumptionWeight = correctAssumptionWeight #weight of assumption
+        self.wrongAssumptionScore = wrongAssumptionWeight
         self.reasonWeight = reasonWeight
 
     # Author: PJ Glasheen
@@ -46,8 +47,11 @@ class Question:
     def getRealWorldModel(self):
         return self.rw_model
 
-    def getAssumptionWeight(self):
-        return self.assumptionWeight
+    def getCorrectAssumptionWeight(self):
+        return self.correctAssumptionWeight
+
+    def getWrongAssumptionWeight(self):
+        return self.wrongAssumptionWeight
 
     def getReasonWeight(self):
         return self.reasonWeight
