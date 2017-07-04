@@ -145,8 +145,9 @@ def firstsubmission(score,root,labelg,checkboxanswer,radiobuttonanswer,questionl
             
             # if checkbox is selected: score change
             if checkboxanswer[x].get()==1:
+                # score increase by weight of assumption
                 score = score+question.getAssumptionWeight()
-                # updates the score when the assumptions are chosen
+                # updates grade label
                 labelg.config(text='Current Grade is '+str(score))
                 
             # change assumption color to green because it is correct
@@ -166,9 +167,6 @@ def firstsubmission(score,root,labelg,checkboxanswer,radiobuttonanswer,questionl
                     
             # if checkbox is not selected: update score and gray out
             elif checkboxanswer[x].get()==0:
-                # update score
-                score = score+question.getAssumptionWeight()
-                labelg.config(text='Current Grade is '+str(score))
                 # gray out
                 gridlist[rowstorage[x][0]].config(fg='gray')    
 
@@ -208,7 +206,7 @@ def secondsubmission(score,root,labelg,checkboxanswer,radiobuttonanswer,question
 
                     # if the radiobutton was selected: update the score
                     if radiobuttonanswer[x].get()==y:
-                        # increment the current score
+                        # score increase by weight of reason
                         score = score+question.getReasonWeight()
                         # update the label
                         labelg.config(text='Current Grade is '+str(score))
