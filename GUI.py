@@ -172,7 +172,12 @@ def firstsubmission(score,root,labelg,checkboxanswer,radiobuttonanswer,questionl
             # if checkbox is not selected: update score and gray out
             elif checkboxanswer[x].get()==0:
                 # gray out
-                gridlist[rowstorage[x][0]].config(fg='gray')    
+                gridlist[rowstorage[x][0]].config(fg='gray')
+                
+    # prevent having negative grade
+    if score < 0.0:
+        score = 0.0
+        labelg.config(text='Current Grade is '+str(score))
 
     # change submit button to next question
     gridlist[len(gridlist)-1].config(text='Next Question',command=lambda:nextquestion(score,root,labelg,checkboxanswer,radiobuttonanswer,questionlist,gridlist,rowstorage,frame1,frame2))
