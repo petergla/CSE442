@@ -2,6 +2,7 @@ import unittest
 from assumption import Assumption
 from question import Question
 import random
+import reader
 # Author: Paata Ugrekhelidze
 
 
@@ -39,6 +40,10 @@ class MyTest(unittest.TestCase):
         self.test_reason = "Lorem Ipsum{}".format(random.randint(0,1000)) #randomize
         self.temp_assumption.add_reason(self.test_value,self.test_reason)
         self.assertEqual(self.temp_assumption.reason_list[-1], (self.test_value,self.test_reason))
+
+
+
+
     # test cases for question library
     # tests addAssumption function in question library
     def test_addAssumption(self):
@@ -121,5 +126,58 @@ class MyTest(unittest.TestCase):
 
 
 
+
+    # test cases for reader file
+    # testing the function that reads the first line from the question list format
+    # supposed to identify the name of the question
+    def test_readQuestion(self):
+        # create a random first line input (Question name)
+        actual_question_name = 'Question {}'.format(random.randint(0,1000))
+        # pass the first line the way it would be read from the textfile
+        test_question_name = reader.readQuestion('Question: {}\n'.format(actual_question_name))
+        self.assertEqual(test_question_name,actual_question_name)
+    # testing the function that reads the second/third line from the question list format
+    # supposed to identify the name of the idealized/realworld image path  
+    def test_readImgPath(self):
+        # create a random second line input(Idealized Model)
+        actual_ideal_name = 'IdealizedModel1_{}.gif'.format(random.randint(0,1000))
+        # pass the second line the way it would be read from the textfile
+        test_ideal_name = reader.readImgPath("I",'Idealized Model: {}\n'.format(actual_ideal_name))
+        self.assertEqual(test_ideal_name,actual_ideal_name)
+    
+    # testing the function that reads the fourth line from the question list format
+    # supposed to identify the name of the assumption with the text & truth value
+    def test_readAssumption(self):
+        
+        # instantiate an assumption object for the testing purposes
+        actual_value = bool(random.getrandbits(1))
+        actual_assumption_text = 'Hip acts as a pivot point (no lifting off the bed){}'.format(random.randint(0,1000))
+        actual_assumption_input = '{} | {}'.format(actual_assumption_text,actual_value)
+        # create the assumption object that should be returned
+
+        actual_assumption = Assumption(actual_value,actual_assumption_text, [])
+        # pass the fourth line the way it would be read from the textfile (supposed to return an assumption object)
+        test_assumption = reader.readAssumption('Assumption: {}\n'.format(actual_assumption_input))
+        self.assertEqual(test_assumption.getAssumptionText(),actual_assumption.getAssumptionText())
+
+    def test_readReason(self):
+
+        # instantiate  an reason object for the testing purposes
+        actual_value = bool(random.getrandbits(1))
+        actual_reason_text = 'Valid reason #1.1.{}'.format(random.randint(0,1000))
+        actual_reason_input = '{} | {}'.format(actual_reason_text,actual_value)
+        # create the reason tuple that should be returned
+
+        actual_reason = (actual_value,actual_reason_text)
+        # pass the fifth line the way it would be read from the textfile (supposed to return a reason tuple)
+        test_reason = reader.readReason('Reason: {}\n'.format(actual_reason_input))
+        self.assertEqual(test_reason,actual_reason)
+    
+
+    # def test_readFile(self):
+
+
+
+
 if __name__ == '__main__':
-unittest.main()
+    unittest.main()
