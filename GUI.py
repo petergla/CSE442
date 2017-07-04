@@ -145,8 +145,8 @@ def firstsubmission(score,root,labelg,checkboxanswer,radiobuttonanswer,questionl
             
             # if checkbox is selected: score change
             if checkboxanswer[x].get()==1:
-                # score increase by weight of assumption
-                score = score+question.getAssumptionWeight()
+                # score increase by weight of correct assumption
+                score = score+question.getCorrectAssumptionWeight()
                 # updates grade label
                 labelg.config(text='Current Grade is '+str(score))
                 
@@ -158,6 +158,10 @@ def firstsubmission(score,root,labelg,checkboxanswer,radiobuttonanswer,questionl
             
             # if checkbox is selected: reasons drop down
             if checkboxanswer[x].get()==1:
+                # score decrease by weight of wrong assumption
+                score = score-question.getWrongAssumptionWeight()
+                # updates grade label
+                labelg.config(text='Current Grade is '+str(score))
                 # assumption color becomes red
                 gridlist[rowstorage[x][0]].config(fg='red')
                 Nreasons = len(question.getAssumptions()[x].getReasons())
