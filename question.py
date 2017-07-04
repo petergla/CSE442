@@ -10,7 +10,7 @@ class Question:
         self.rw_model = rw_model #String of path to real world model image
         self.ideal_model = ideal_model #String of path to idealized model image
         self.correctAssumptionWeight = correctAssumptionWeight #weight of assumption
-        self.wrongAssumptionScore = wrongAssumptionWeight
+        self.wrongAssumptionWeight = wrongAssumptionWeight
         self.reasonWeight = reasonWeight
 
     # Author: PJ Glasheen
