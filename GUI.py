@@ -146,7 +146,7 @@ def firstsubmission(score,root,labelg,checkboxanswer,radiobuttonanswer,questionl
             # if checkbox is selected: score change
             if checkboxanswer[x].get()==1:
                 # score increase by weight of correct assumption
-                score = score+question.getCorrectAssumptionWeight()
+                score = score+question.getCorrectAssumptionWeight()                         
                 # updates grade label
                 labelg.config(text='Current Grade is '+str(score))
                 
@@ -158,7 +158,7 @@ def firstsubmission(score,root,labelg,checkboxanswer,radiobuttonanswer,questionl
             
             # if checkbox is selected: reasons drop down
             if checkboxanswer[x].get()==1:
-                # score decrease by weight of wrong assumption
+                # score decrease by weight of wrong assumption                              
                 score = score-question.getWrongAssumptionWeight()
                 # updates grade label
                 labelg.config(text='Current Grade is '+str(score))
@@ -174,7 +174,7 @@ def firstsubmission(score,root,labelg,checkboxanswer,radiobuttonanswer,questionl
                 # gray out
                 gridlist[rowstorage[x][0]].config(fg='gray')
                 
-    # prevent having negative grade
+    # prevent having negative grade                                                         
     if score < 0.0:
         score = 0.0
         labelg.config(text='Current Grade is '+str(score))
