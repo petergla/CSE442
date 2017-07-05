@@ -159,7 +159,7 @@ def firstsubmission(score, root, labelg, checkboxanswer, radiobuttonanswer, ques
             gridlist[rowstorage[x][0]].config(fg='#00cc00')
 
         # if assumption is not correct
-        elif question.getAssumptions()[x].getTruthValue() == 0:
+        elif question.getAssumptions()[x].getTruthValue() == 0 or question.getAssumptions()[x].getTruthValue() == 2:
 
             # if checkbox is selected: reasons drop down
             if checkboxanswer[x].get() == 1:
@@ -200,7 +200,7 @@ def firstsubmission(score, root, labelg, checkboxanswer, radiobuttonanswer, ques
     # if reason drops down change submit button text "Next Question" to second submission text "Submit Answer"
     for x in xrange(0, len(checkboxanswer)):
         # if the assumption is wrong
-        if question.getAssumptions()[x].getTruthValue() == 0:
+        if question.getAssumptions()[x].getTruthValue() == 0 or question.getAssumptions()[x].getTruthValue() == 2:
             # if the assumption checkbox was chosen
             if checkboxanswer[x].get() == 1:
                 # change the button text to "Submit Answer"
