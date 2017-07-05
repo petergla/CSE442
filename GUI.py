@@ -144,7 +144,7 @@ def firstsubmission(score, root, labelg, checkboxanswer, radiobuttonanswer, ques
         label = Label(frame2, text=question.getAssumptions()[x].getAssumptionText())
         gridlist[rowstorage[x][0]].config(state=DISABLED)
         gridlist[rowstorage[x][0]] = label
-        gridlist[rowstorage[x][0]].grid(row=rowstorage[x][0], padx=24, sticky=W)
+        gridlist[rowstorage[x][0]].grid(row=rowstorage[x][0], padx=20, sticky=W)
 
         # if assumption is correct
         if question.getAssumptions()[x].getTruthValue() == 1:
