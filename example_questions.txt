@@ -24,8 +24,8 @@ Reason: Invalid Reason #HertzRules! | False
 Assumption: Patient does not slide on the bed | True
 
 Question: Question 2
-Idealized Model: RealWorld_1.gif
-Real World Model: IdealizedModel2.gif
+Idealized Model: IdealizedModel2.gif
+Real World Model: RealWorld_1.gif
 Assumption: Forces are reasonably approximated using static analysis | True
 Assumption: Lower leg remains approximately perpendicular to upper leg | True
 Assumption: Hip acts as a pivot point (no lifting off the bed) | True
