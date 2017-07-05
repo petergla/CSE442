@@ -1,13 +1,13 @@
 from question import Question
 from assumption import Assumption
 from truthvalue import TruthValue
+# Author: PJ Glasheen
 
 # Reads a line of the text file that begins with question and returns string of question name
 def readQuestion(line):
     index = 9 #Index of the char where the question name begins
     while line[index] == " ":
         index = index + 1 #Ignores preceding spaces
-    # print line[index:]
     return line[index:-1] #returns the question name & deletes the \n char at the end
 
 # Reads line that is an image path and returns string of image path
@@ -54,7 +54,6 @@ def readReason(line):
     while line[index] != "|":
         reasonText = reasonText + line[index]
         index = index + 1
-        # print reasonText
     while reasonText[-1] == " ": #removes trailing spaces
         reasonText = reasonText[:-1]
     index = index + 1
@@ -83,7 +82,7 @@ def readWeight(type, line):
     return float(weightString) #returns weight as floating point number
 
 
-#main function
+#reads txt file with questions and returns list of Questions
 def readFile(filename):
     questionList = []
     questionfile = open(filename, "r")
@@ -98,7 +97,7 @@ def readFile(filename):
 
     for line in questionfile:
         if line[0] == "Q":
-            if firstQuestionRead: #Appends prev. question to question list
+            if firstQuestionRead: #Appends prev. question to question list only if first question has been read
                 questionList.append(Question(questionName, realWorldModel, idealizedModel, assumptions, correctAssumptionWeight, wrongAssumptionWeight, reasonWeight))
             assumptions = [] #clears the assumption list
             wrongAssumptionWeight = 0    #\
@@ -121,10 +120,6 @@ def readFile(filename):
             correctAssumptionWeight = readWeight("C", line)
         elif line[0] == "W":
             wrongAssumptionWeight = readWeight("W", line)
-
+    #Appends last question read to question list
     questionList.append(Question(questionName, realWorldModel, idealizedModel, assumptions, correctAssumptionWeight, wrongAssumptionWeight, reasonWeight))
     return questionList
-
-
-# print readImgPath("I", "Idealized Model: sample.gif\n")
-# print readImgPath("R", "Real World Model: sample.gif\n")
