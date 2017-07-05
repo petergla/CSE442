@@ -3,6 +3,7 @@ from question import Question
 from assumption import Assumption
 from truthvalue import TruthValue
 from reader import readFile
+import ttk
 
 
 # resizes images until height and width are both less than 1000 pixels
@@ -41,7 +42,7 @@ def makelayout(score, root, questionlist):
     Label().image = img2
     # Everything starting from this point is in frame 1: grade, images and question number
     # frame 1: has grade label, canvas(inner frame where images are packed) for two images ,and a question label
-    frame1 = Frame(root, width=(img1.width() + img2.width()) / 2, height=100)
+    frame1 =ttk.Frame(root, width=(img1.width() + img2.width()) / 2, height=200)  #ttk is to make the UI more modern
     frame1.pack(expand=True)
 
     # Displays grade label on top left corner. Frozen version of the grade. Updates when makelayout is recalled with a new score. Gets recalled after a new question
@@ -59,7 +60,7 @@ def makelayout(score, root, questionlist):
     labelq.grid(row=2)
 
     # frame 1 ends here. frame 2 starts from here: includes assumptions and submition button
-    frame2 = Frame(root, width=(img1.width() + img2.width()) / 2, height=100)
+    frame2 = ttk.Frame(root, width=(img1.width() + img2.width()) / 2, height=100)
     frame2.pack(expand=True)
 
     # list of values(int) that store answers(1 or 0) for each checkbox:
@@ -67,15 +68,15 @@ def makelayout(score, root, questionlist):
     # amount of assumptions in total
     Nassumptions = len(question.getAssumptions())
     for x in xrange(0, Nassumptions):
-        checkboxvalue = IntVar()
-        checkboxanswer.append(checkboxvalue)
+        ttk.checkboxvalue = IntVar()
+        checkboxanswer.append(ttk.checkboxvalue)
 
     # list of values(int) that store answers(1 or 0) for each radiobutton:
     radiobuttonanswer = []
     Nassumptions = len(question.getAssumptions())
     for x in xrange(0, Nassumptions):
-        radiobuttonvalue = IntVar()
-        radiobuttonanswer.append(radiobuttonvalue)
+        ttk.radiobuttonvalue = IntVar()
+        radiobuttonanswer.append(ttk.radiobuttonvalue)
 
     # list of list that stores the numbers that represent rows for each assumption andntheir own reasons:
     rowstorage = []
@@ -97,7 +98,7 @@ def makelayout(score, root, questionlist):
     r = 0  # row counter for assumptions and reasons
     for x in xrange(0, Nassumptions):
         # create a checkbox for each assumption
-        assumpttion = Checkbutton(frame2, text=question.getAssumptions()[x].getAssumptionText(),
+        assumpttion = ttk.Checkbutton(frame2, text=question.getAssumptions()[x].getAssumptionText(),
                                   variable=checkboxanswer[x])
         # grid list will store all the chechboxes and radiobuttons in order
         gridlist.append(assumpttion)
@@ -121,7 +122,7 @@ def makelayout(score, root, questionlist):
             r = r + 1
 
     # submit button
-    buttons = Button(frame2, text="Submit Answer",
+    buttons = ttk.Button(frame2, text="Submit Answer",
                      command=lambda: firstsubmission(score, root, labelg, checkboxanswer, radiobuttonanswer,
                                                      questionlist, gridlist, rowstorage, frame1, frame2))
     gridlist.append(buttons)
@@ -279,15 +280,16 @@ def nextquestion(score, root, labelg, checkboxanswer, radiobuttonanswer, questio
 
 # function for the final page layout
 def finishpage(score, root):
-    frame3 = Frame(width=100, height=100)
+    frame3 = Frame(width=100, height=100) #make frame
     frame3.pack(expand=True)
-    photo = (PhotoImage(file="codebusters.gif"))
+    photo = (PhotoImage(file="codebusters.gif")) #fetch file
     label = Label(image=photo)
     label.image = photo# keep a reference!
-    label.pack()
-    label1 = Label(frame3,text="The Final Score Is " + str(score), font="Helvetica 22 bold", fg='green', bg='black')
+    label.pack(expand=True)
+    label1 = Label(frame3,text="The Final Score Is " + str(score), font="Helvetica 22 bold", fg='green', bg='black')#final score
     label1.grid(columnspan=True,rowspan=True,padx=10,pady=5)
-    can = Canvas(frame3,width=10,height=10)
+    can = Canvas(frame3,width=10,height=10)#change picture size/canvas size
+    #can.create_image(200,200,image=photo)
     can.grid()
     print "This is the final page"
 
