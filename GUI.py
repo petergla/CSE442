@@ -7,7 +7,7 @@ from reader import readFile
 
 # resizes images until height and width are both less than 1000 pixels
 def resizephotoimagewithin1000pixel(img):
-    while (img.height() > 500 or img.width() > 500):
+    while (img.height() > 800 or img.width() > 800):
         # scale it down
         img = img.subsample(2, 2)
     return img
@@ -42,7 +42,7 @@ def makelayout(score, root, questionlist):
     # Everything starting from this point is in frame 1: grade, images and question number
     # frame 1: has grade label, canvas(inner frame where images are packed) for two images ,and a question label
     frame1 = Frame(root, width=(img1.width() + img2.width()) / 2, height=100)
-    frame1.pack()
+    frame1.pack(expand=True)
 
     # Displays grade label on top left corner. Frozen version of the grade. Updates when makelayout is recalled with a new score. Gets recalled after a new question
     labelg = Label(frame1, text="Current Grade is " + str(score), font="Helvetica 36 bold", fg='black')
@@ -60,7 +60,7 @@ def makelayout(score, root, questionlist):
 
     # frame 1 ends here. frame 2 starts from here: includes assumptions and submition button
     frame2 = Frame(root, width=(img1.width() + img2.width()) / 2, height=100)
-    frame2.pack()
+    frame2.pack(expand=True)
 
     # list of values(int) that store answers(1 or 0) for each checkbox:
     checkboxanswer = []
@@ -193,9 +193,9 @@ def firstsubmission(score, root, labelg, checkboxanswer, radiobuttonanswer, ques
     # if it is the last question make sure to change submit button text to "Final Score"
     if len(questionlist) == 1:
         gridlist[len(gridlist) - 1].config(text='Final Score',
-                                       command=lambda: nextquestion(score, root, labelg, checkboxanswer,
-                                                                    radiobuttonanswer, questionlist, gridlist,
-                                                                    rowstorage, frame1, frame2))
+                                           command=lambda: nextquestion(score, root, labelg, checkboxanswer,
+                                                                        radiobuttonanswer, questionlist, gridlist,
+                                                                        rowstorage, frame1, frame2))
 
     # if reason drops down change submit button text "Next Question" to second submission text "Submit Answer"
     for x in xrange(0, len(checkboxanswer)):
@@ -253,13 +253,13 @@ def secondsubmission(score, root, labelg, checkboxanswer, radiobuttonanswer, que
                                        command=lambda: nextquestion(score, root, labelg, checkboxanswer,
                                                                     radiobuttonanswer, questionlist, gridlist,
                                                                     rowstorage, frame1, frame2))
-  
+
     # if it is the last question then make sure that it changes the title of the submit button to "Final Score"
     if len(questionlist) == 1:
         gridlist[len(gridlist) - 1].config(text='Final Score',
-                                       command=lambda: nextquestion(score, root, labelg, checkboxanswer,
-                                                                    radiobuttonanswer, questionlist, gridlist,
-                                                                    rowstorage, frame1, frame2))
+                                           command=lambda: nextquestion(score, root, labelg, checkboxanswer,
+                                                                        radiobuttonanswer, questionlist, gridlist,
+                                                                        rowstorage, frame1, frame2))
 
 
 def nextquestion(score, root, labelg, checkboxanswer, radiobuttonanswer, questionlist, gridlist, rowstorage, frame1,
@@ -280,7 +280,7 @@ def nextquestion(score, root, labelg, checkboxanswer, radiobuttonanswer, questio
 # function for the final page layout
 def finishpage(score, root):
     frame3 = Frame(width=100, height=100)
-    frame3.pack(fill='both')
+    frame3.pack(expand=True)
     photo = (PhotoImage(file="codebusters.gif"))
     label = Label(image=photo)
     label.image = photo# keep a reference!
