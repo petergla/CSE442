@@ -7,7 +7,7 @@ from reader import readFile
 
 # resizes images until height and width are both less than 1000 pixels
 def resizephotoimagewithin1000pixel(img):
-    while (img.height() > 1000 or img.width() > 1000):
+    while (img.height() > 500 or img.width() > 500):
         # scale it down
         img = img.subsample(2, 2)
     return img
@@ -279,15 +279,17 @@ def nextquestion(score, root, labelg, checkboxanswer, radiobuttonanswer, questio
 
 # function for the final page layout
 def finishpage(score, root):
-    frame3 = Frame(width=500, height=500)
+    frame3 = Frame(width=100, height=100)
     frame3.pack(fill='both')
-    photo = resizephotoimagewithin1000pixel(PhotoImage(file="codebusters.gif"))
+    photo = (PhotoImage(file="codebusters.gif"))
     label = Label(image=photo)
     label.image = photo# keep a reference!
-    label.pack(fill='both',anchor=S)
-    label1 = Label(frame3,text="Your Final Score Is " + str(score), font="Helvetica 36 bold", fg='green', bg='black')
-    label1.grid(sticky=N)
-    can = Canvas(frame3, width=500, height=500)
+    label.pack()
+    label1 = Label(frame3,text="The Final Score Is " + str(score), font="Helvetica 22 bold", fg='green', bg='black')
+    label1.grid(rowspan=True,columnspan=True,padx=10,pady=5)
+    can = Canvas(frame3,width=10,height=10)
+    #can.create_image(200,200,image=photo)
+    can.grid()
     print "This is the final page"
 
 
