@@ -286,9 +286,8 @@ def finishpage(score, root):
     label.image = photo# keep a reference!
     label.pack()
     label1 = Label(frame3,text="The Final Score Is " + str(score), font="Helvetica 22 bold", fg='green', bg='black')
-    label1.grid(rowspan=True,columnspan=True,padx=10,pady=5)
-    can = Canvas(frame3,width=10,height=10)
-    #can.create_image(200,200,image=photo)
+    label1.grid(columnspan=True,rowspan=True,padx=10,pady=5)
+    can = Canvas(frame3,width=10,height=10
     can.grid()
     print "This is the final page"
 
