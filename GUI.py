@@ -190,7 +190,14 @@ def firstsubmission(score, root, labelg, checkboxanswer, radiobuttonanswer, ques
                                                                     radiobuttonanswer, questionlist, gridlist,
                                                                     rowstorage, frame1, frame2))
 
-    # if reason drop down change submit text "Next Question" button to second submission text "Submit Answer" button
+    # if it is the last question make sure to change submit button text to "Final Score"
+    if len(questionlist) == 1:
+        gridlist[len(gridlist) - 1].config(text='Final Score',
+                                       command=lambda: nextquestion(score, root, labelg, checkboxanswer,
+                                                                    radiobuttonanswer, questionlist, gridlist,
+                                                                    rowstorage, frame1, frame2))
+
+    # if reason drops down change submit button text "Next Question" to second submission text "Submit Answer"
     for x in xrange(0, len(checkboxanswer)):
         # if the assumption is wrong
         if question.getAssumptions()[x].getTruthValue() == 0:
@@ -243,6 +250,13 @@ def secondsubmission(score, root, labelg, checkboxanswer, radiobuttonanswer, que
 
     # change submit button function and text to "Next Question"
     gridlist[len(gridlist) - 1].config(text='Next Question',
+                                       command=lambda: nextquestion(score, root, labelg, checkboxanswer,
+                                                                    radiobuttonanswer, questionlist, gridlist,
+                                                                    rowstorage, frame1, frame2))
+  
+    # if it is the last question then make sure that it changes the title of the submit button to "Final Score"
+    if len(questionlist) == 1:
+        gridlist[len(gridlist) - 1].config(text='Final Score',
                                        command=lambda: nextquestion(score, root, labelg, checkboxanswer,
                                                                     radiobuttonanswer, questionlist, gridlist,
                                                                     rowstorage, frame1, frame2))
