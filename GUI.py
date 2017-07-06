@@ -8,7 +8,7 @@ import ttk
 
 # resizes images until height and width are both less than 1000 pixels
 def resizephotoimagewithin1000pixel(img):
-    while (img.height() > 800 or img.width() > 800):
+    while (img.height() > 1000 or img.width() > 1000):
         # scale it down
         img = img.subsample(2, 2)
     return img
