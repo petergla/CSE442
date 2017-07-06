@@ -68,11 +68,11 @@ def readReason(line):
 def readWeight(type, line):
     index = 0
     #checks the type of weight and assigns the starting index
-    if type == "R":
+    if type == "R": #R signifies reason weight. The weight would begin at index 14 in this case
         index = 14
-    elif type == "C":
+    elif type == "C": #C signifies correct assumption weight. The indes would be 26
         index = 26
-    elif type == "W":
+    elif type == "W": #Wrong assumtion weight. Index is 14.
         index = 24
     while line[index] == " ": #ignore preceding spaces
         index = index + 1
@@ -105,20 +105,20 @@ def readFile(filename):
             reasonWeight = 1             #/
             questionName = readQuestion(line)
             firstQuestionRead = True
-        elif line[0] == "I":
+        elif line[0] == "I": #If line is idealized model line, runs readImgPath with I identifier
             idealizedModel = readImgPath("I", line)
-        elif line[0] == "R" and line[3] == "l":
+        elif line[0] == "R" and line[3] == "l": #if line defines real world model, runs readImgPath with R identifier
             realWorldModel = readImgPath("R", line)
-        elif line[0] == "A":
+        elif line[0] == "A": #If line is assumption line, runs readAssumption
             assumptions.append(readAssumption(line))
-        elif line[0] == "R" and line[3] == "s" and line[6] == ":":
+        elif line[0] == "R" and line[3] == "s" and line[6] == ":": #If line is reason line, runs readReason
             reason = readReason(line)
             assumptions[-1].add_reason(reason[0], reason[1])
-        elif line[0] == "R" and line[3] == "s" and line[6] == " ":
+        elif line[0] == "R" and line[3] == "s" and line[6] == " ": #If line is Reason Weight line, runs readWeight with R identifier
             reasonWeight = readWeight("R",line)
-        elif line[0] == "C":
+        elif line[0] == "C": #If the line is a correct assumption weight, runs readWeight with C identifier
             correctAssumptionWeight = readWeight("C", line)
-        elif line[0] == "W":
+        elif line[0] == "W": #If the line is a wrong assumption weight, runs readWeight with W identifier
             wrongAssumptionWeight = readWeight("W", line)
     #Appends last question read to question list
     questionList.append(Question(questionName, realWorldModel, idealizedModel, assumptions, correctAssumptionWeight, wrongAssumptionWeight, reasonWeight))
