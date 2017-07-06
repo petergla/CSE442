@@ -1,0 +1,20 @@
+Question: Question 1
+Idealized Model: IdealizedModel1_1.gif
+Real World Model: RealWorld_1.gif
+Correct Assumption Weight: 1
+Wrong Assumption Weight: 0
+Reason Weight: .25
+Assumption: Hip acts as a pivot point (no lifting off the bed) | True
+Assumption: Incorrect Assumption #1.1 | False
+Reason: Valid reason #1.1.1 | True
+Reason: Invalid Reason #1.1.2 | False
+Reason: Invalid Reason #1.1.3 | False
+Assumption: Patient does not slide on the bed | True
+
+Question: Question 2
+Idealized Model: IdealizedModel2.gif
+Real World Model: RealWorld_1.gif
+Assumption: Forces are reasonably approximated using static analysis | True
+Assumption: Lower leg remains approximately perpendicular to upper leg | True
+Assumption: Hip acts as a pivot point (no lifting off the bed) | True
+Assumption: Patient does not slide on the bed | True
