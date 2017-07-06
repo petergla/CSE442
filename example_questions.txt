@@ -28,6 +28,9 @@ Reason: Valid Reason #ExamplesAreHard | True
 Question: Question 2
 Idealized Model: IdealizedModel2.gif
 Real World Model: RealWorld_1.gif
+Correct Assumption Weight: 1
+Wrong Assumption Weight: .5
+Reason Weight: .25
 Assumption: Forces are reasonably approximated using static analysis | True
 Assumption: Lower leg remains approximately perpendicular to upper leg | True
 Assumption: Hip acts as a pivot point (no lifting off the bed) | True
