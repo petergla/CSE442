@@ -56,7 +56,7 @@ def makelayout(score, root, questionlist):
     can.grid(row=1, sticky=W)
 
     # question number label
-    labelq = Label(frame1, text=question.getName(), font="Helvetica 16 bold", pady=25)
+    labelq = Label(frame1, text=question.getName(), font="Helvetica 16 bold", pady=10)
     labelq.grid(row=2)
 
     # frame 1 ends here. frame 2 starts from here: includes assumptions and submition button
@@ -126,7 +126,7 @@ def makelayout(score, root, questionlist):
                      command=lambda: firstsubmission(score, root, labelg, checkboxanswer, radiobuttonanswer,
                                                      questionlist, gridlist, rowstorage, frame1, frame2))
     gridlist.append(buttons)
-    gridlist[len(gridlist) - 1].grid(row=len(gridlist) - 1, pady=25)
+    gridlist[len(gridlist) - 1].grid(row=len(gridlist) - 1, pady=10)
 
 
 # submissions take care of two submission processes:
